@@ -3,23 +3,21 @@ default: &default
   encoding: unicode
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-
 development:
   <<: *default
   database: conecta_trampos_development
-  username: postgres
-  password: 784512
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
   host: localhost
   port: 5432
 
 test:
   <<: *default
   database: conecta_trampos_test
-  username: postgres
-  password: 784512
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
   host: localhost
   port: 5432
-
 
 production:
   primary: &primary_production
