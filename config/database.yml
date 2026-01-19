@@ -5,35 +5,24 @@ default: &default
 
 development:
   <<: *default
-  database: conecta_trampos_development
-  username: <%= ENV["POSTGRES_USER"] %>
-  password: <%= ENV["POSTGRES_PASSWORD"] %>
-  host: localhost
-  port: 5432
+  host: <%= ENV.fetch('POSTGRES_HOST', 'localhost') %>
+  username: <%= ENV.fetch('POSTGRES_USER', 'postgres') %>
+  password: <%= ENV.fetch('POSTGRES_PASSWORD', '') %>
+  database: <%= ENV.fetch('POSTGRES_DB', 'conecta_trampos_development') %>
+  port: <%= ENV.fetch('POSTGRES_PORT', 5432) %>
 
 test:
   <<: *default
+  host: <%= ENV.fetch('POSTGRES_HOST', 'localhost') %>
+  username: <%= ENV.fetch('POSTGRES_USER', 'postgres') %>
+  password: <%= ENV.fetch('POSTGRES_PASSWORD', '') %>
   database: conecta_trampos_test
-  username: <%= ENV["POSTGRES_USER"] %>
-  password: <%= ENV["POSTGRES_PASSWORD"] %>
-  host: localhost
-  port: 5432
+  port: <%= ENV.fetch('POSTGRES_PORT', 5432) %>
 
 production:
-  primary: &primary_production
-    <<: *default
-    database: conecta_trampos_production
-    username: conecta_trampos
-    password: <%= ENV["CONECTA_TRAMPOS_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: conecta_trampos_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: conecta_trampos_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: conecta_trampos_production_cable
-    migrations_paths: db/cable_migrate
+  <<: *default
+  host: <%= ENV.fetch('POSTGRES_HOST') %>
+  username: <%= ENV.fetch('POSTGRES_USER') %>
+  password: <%= ENV.fetch('POSTGRES_PASSWORD') %>
+  database: <%= ENV.fetch('POSTGRES_DB') %>
+  port: <%= ENV.fetch('POSTGRES_PORT', 5432) %>
