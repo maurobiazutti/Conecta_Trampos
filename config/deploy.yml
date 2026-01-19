@@ -60,9 +60,6 @@ accessories:
       clear:
         POSTGRES_USER: postgres
         POSTGRES_DB: conecta_trampos_production
-      secret:
-        - POSTGRES_PASSWORD
-    files:
-      - config/init.sql:/docker-entrypoint-initdb.d/setup.sql
+        POSTGRES_PASSWORD: "784512"
     directories:
       - data: /var/lib/postgresql/data
