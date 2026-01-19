@@ -5,7 +5,7 @@ image: maurobiazutti/conecta_trampos
 
 servers:
   web:
-    - 192.168.1.9
+    - 192.168.1.7
 
 registry:
   server: ghcr.io
@@ -21,7 +21,7 @@ boot:
 # Variáveis de Ambiente
 env:
   clear:
-    POSTGRES_HOST: 192.168.1.9
+    POSTGRES_HOST: 192.168.1.7
     POSTGRES_PORT: 5432
     POSTGRES_USER: postgres
     POSTGRES_DB: conecta_trampos_production
@@ -54,7 +54,7 @@ builder:
 accessories:
   db:
     image: postgres:16
-    host: 192.168.1.9
+    host: 192.168.1.7
     port: 5432
     env:
       clear:
