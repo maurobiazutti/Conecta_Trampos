@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
@@ -21,8 +21,8 @@ test:
 
 production:
   <<: *default
-  host: <%= ENV.fetch('POSTGRES_HOST') %>
-  username: <%= ENV.fetch('POSTGRES_USER') %>
-  password: <%= ENV.fetch('POSTGRES_PASSWORD') %>
-  database: <%= ENV.fetch('POSTGRES_DB') %>
+  host: <%= ENV.fetch('POSTGRES_HOST', 'localhost') %>  # ← Adicionar default
+  username: <%= ENV.fetch('POSTGRES_USER', 'postgres') %>  # ← Adicionar default
+  password: <%= ENV.fetch('POSTGRES_PASSWORD', '') %>  # ← Adicionar default
+  database: <%= ENV.fetch('POSTGRES_DB', 'conecta_trampos_production') %>  # ← Adicionar default
   port: <%= ENV.fetch('POSTGRES_PORT', 5432) %>
