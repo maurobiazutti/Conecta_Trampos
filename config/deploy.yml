@@ -9,7 +9,7 @@ servers:
 
 registry:
   server: ghcr.io
-  username: maurobiazutti
+  username: mauro
   password:
     - KAMAL_REGISTRY_PASSWORD
 
