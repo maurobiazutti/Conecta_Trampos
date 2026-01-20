@@ -58,10 +58,9 @@ accessories:
     host: 192.168.1.7
     port: "5432:5432"
     env:
-      secret:
-        - POSTGRES_PASSWORD
       clear:
         POSTGRES_USER: postgres
         POSTGRES_DB: conecta_trampos_production
+        POSTGRES_PASSWORD: 784512
     directories:
       - data:/var/lib/postgresql/data
