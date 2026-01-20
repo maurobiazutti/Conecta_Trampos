@@ -1,37 +1,44 @@
 #!/bin/bash -e
 
-echo "[Docker Entrypoint] Starting with arguments: $@"
-
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
-  echo "[Docker Entrypoint] Detected Rails server startup"
-  echo "[Docker Entrypoint] DB_HOST: ${DB_HOST:-localhost}"
-  echo "[Docker Entrypoint] POSTGRES_USER: ${POSTGRES_USER:-postgres}"
-  
-  echo "[Docker Entrypoint] Waiting for PostgreSQL to be ready..."
-  
-  # Wait for PostgreSQL to be available with timeout
-  attempt=0
-  max_attempts=30
-  until pg_isready -h ${DB_HOST:-localhost} -p ${DB_PORT:-5432} -U ${POSTGRES_USER:-postgres} 2>/dev/null; do
-    attempt=$((attempt+1))
-    if [ $attempt -ge $max_attempts ]; then
-      echo "[Docker Entrypoint] ERROR: PostgreSQL did not become ready after $max_attempts attempts"
-      exit 1
-    fi
-    echo "[Docker Entrypoint] PostgreSQL is unavailable (attempt $attempt/$max_attempts) - sleeping 2s"
-    sleep 2
-  done
-  
-  echo "[Docker Entrypoint] PostgreSQL is ready! Preparing database..."
-  if ./bin/rails db:prepare; then
-    echo "[Docker Entrypoint] Database prepared successfully"
-  else
-    echo "[Docker Entrypoint] WARNING: Database preparation had issues, but continuing..."
-  fi
-else
-  echo "[Docker Entrypoint] Not a Rails server startup, skipping DB preparation"
+  ./bin/rails db:prepare
 fi
 
-echo "[Docker Entrypoint] Executing: $@"
 exec "${@}"
+
+# echo "[Docker Entrypoint] Starting with arguments: $@"
+
+# # If running the rails server then create or migrate existing database
+# if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
+#   echo "[Docker Entrypoint] Detected Rails server startup"
+#   echo "[Docker Entrypoint] DB_HOST: ${DB_HOST:-localhost}"
+#   echo "[Docker Entrypoint] POSTGRES_USER: ${POSTGRES_USER:-postgres}"
+  
+#   echo "[Docker Entrypoint] Waiting for PostgreSQL to be ready..."
+  
+#   # Wait for PostgreSQL to be available with timeout
+#   attempt=0
+#   max_attempts=30
+#   until pg_isready -h ${DB_HOST:-localhost} -p ${DB_PORT:-5432} -U ${POSTGRES_USER:-postgres} 2>/dev/null; do
+#     attempt=$((attempt+1))
+#     if [ $attempt -ge $max_attempts ]; then
+#       echo "[Docker Entrypoint] ERROR: PostgreSQL did not become ready after $max_attempts attempts"
+#       exit 1
+#     fi
+#     echo "[Docker Entrypoint] PostgreSQL is unavailable (attempt $attempt/$max_attempts) - sleeping 2s"
+#     sleep 2
+#   done
+  
+#   echo "[Docker Entrypoint] PostgreSQL is ready! Preparing database..."
+#   if ./bin/rails db:prepare; then
+#     echo "[Docker Entrypoint] Database prepared successfully"
+#   else
+#     echo "[Docker Entrypoint] WARNING: Database preparation had issues, but continuing..."
+#   fi
+# else
+#   echo "[Docker Entrypoint] Not a Rails server startup, skipping DB preparation"
+# fi
+
+# echo "[Docker Entrypoint] Executing: $@"
+# exec "${@}"
