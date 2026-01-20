@@ -29,7 +29,7 @@ env:
     RAILS_LOG_TO_STDOUT: true
   secret:
     - RAILS_MASTER_KEY
-    - POSTGRES_PASSWORD
+    - KAMAL_REGISTRY_PASSWORD
 
 # Aliases úteis para gerenciar o app no servidor
 aliases:
