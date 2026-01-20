@@ -56,12 +56,12 @@ accessories:
   db:
     image: postgres:16
     host: 192.168.1.7
-    port: 5432
+    port: "5432:5432"
     env:
+      secret:
+        - POSTGRES_PASSWORD
       clear:
         POSTGRES_USER: postgres
         POSTGRES_DB: conecta_trampos_production
-      secret:
-        - POSTGRES_PASSWORD
     directories:
       - data:/var/lib/postgresql/data
