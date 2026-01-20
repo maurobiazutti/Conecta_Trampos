@@ -11,7 +11,7 @@ registry:
   server: ghcr.io
   username: mauro
   password: 
-    - KAMAL_REGISTRY_PASSWORD
+    - DOCKER_PASSWORD
 
 # Configurações de boot e deploy
 boot:
@@ -27,7 +27,6 @@ env:
     POSTGRES_DB: conecta_trampos_production
     RAILS_ENV: production
     RAILS_LOG_TO_STDOUT: true
-    # SOLID_QUEUE_IN_PUMA: true
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
