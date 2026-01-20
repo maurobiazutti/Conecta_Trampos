@@ -1,7 +1,7 @@
 service: conecta_trampos
 
 # No GHCR, a imagem deve seguir este padrão:
-image: ghcr.io/mauro/conecta_trampos
+image: maurobiazutti/conecta_trampos
 
 servers:
   web:
@@ -9,8 +9,8 @@ servers:
 
 registry:
   server: ghcr.io
-  username: mauro
-  password: 
+  username: maurobiazutti
+  password:
     - KAMAL_REGISTRY_PASSWORD
 
 # Configurações de boot e deploy
