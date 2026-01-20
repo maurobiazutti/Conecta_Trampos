@@ -33,6 +33,7 @@ env:
   secret:
     - RAILS_MASTER_KEY
     - KAMAL_REGISTRY_PASSWORD
+    - POSTGRES_PASSWORD
 
 # Aliases úteis para gerenciar o app no servidor
 aliases:

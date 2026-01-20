@@ -21,7 +21,7 @@ test:
 
 production:
   <<: *default
-  host: <%= ENV.fetch('POSTGRES_HOST', 'localhost') %>
+  host: <%= ENV.fetch('POSTGRES_HOST', 'conecta_trampos-db') %>
   username: <%= ENV.fetch('POSTGRES_USER', 'postgres') %>
   password: <%= ENV.fetch('POSTGRES_PASSWORD', '') %>
   database: <%= ENV.fetch('POSTGRES_DB', 'conecta_trampos_production') %>
