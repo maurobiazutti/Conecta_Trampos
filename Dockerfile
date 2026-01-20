@@ -75,4 +75,6 @@ EXPOSE 80
 
 # Comando de inicialização usando Thruster para servir o Rails
 # CMD ["./bin/thrust", "./bin/rails", "server"]
-CMD ["./bin/thrust"]
+# CMD ["./bin/thrust"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "80"]
+
