@@ -21,7 +21,7 @@ boot:
 # Variáveis de Ambiente
 env:
   clear:
-    POSTGRES_HOST: 192.168.1.7
+    POSTGRES_HOST: db
     POSTGRES_PORT: 5432
     POSTGRES_USER: postgres
     POSTGRES_DB: conecta_trampos_production
@@ -31,7 +31,6 @@ env:
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
-    - KAMAL_REGISTRY_PASSWORD
 
 # Aliases úteis para gerenciar o app no servidor
 aliases:
