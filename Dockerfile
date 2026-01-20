@@ -47,7 +47,9 @@ RUN bundle install && \
 # Copia o código e pré-compila assets
 COPY . .
 RUN bundle exec bootsnap precompile -j 1 app/ lib/
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+RUN RAILS_ENV=production SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
+
 
 
 # 3. FINAL: Imagem enxuta para rodar no seu servidor
