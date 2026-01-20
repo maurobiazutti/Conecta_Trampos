@@ -10,7 +10,8 @@ servers:
 registry:
   server: ghcr.io
   username: mauro
-  password: KAMAL_REGISTRY_PASSWORD
+  password: 
+    - KAMAL_REGISTRY_PASSWORD
 
 # Configurações de boot e deploy
 boot:
