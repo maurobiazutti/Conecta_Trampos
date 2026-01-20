@@ -29,7 +29,7 @@ env:
     POSTGRES_DB: conecta_trampos_production
     RAILS_ENV: production
     RAILS_LOG_TO_STDOUT: true
-    DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@192.168.1.7:5432/conecta_trampos_production
+    # DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@192.168.1.7:5432/conecta_trampos_production
   secret:
     - RAILS_MASTER_KEY
     - KAMAL_REGISTRY_PASSWORD
