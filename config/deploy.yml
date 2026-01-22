@@ -13,6 +13,7 @@ registry:
   username: maurobiazutti
   password:
     - KAMAL_REGISTRY_PASSWORD
+    - POSTGRES_PASSWORD
 
 # Configurações de boot e deploy
 boot:
