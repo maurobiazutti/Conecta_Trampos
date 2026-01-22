@@ -63,6 +63,7 @@ accessories:
       clear:
         POSTGRES_USER: postgres
         POSTGRES_DB: conecta_trampos_production
-        POSTGRES_PASSWORD: 784512
+      secret:
+        - POSTGRES_PASSWORD
     directories:
       - data:/var/lib/postgresql/data
