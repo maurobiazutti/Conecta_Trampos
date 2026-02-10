@@ -2,7 +2,9 @@ service: conecta_trampos
 
 # No GHCR, a imagem deve seguir este padrão:
 image: maurobiazutti/conecta_trampos
-
+ssh:
+  user: mauro
+  
 servers:
   web:
     hosts:
@@ -55,7 +57,7 @@ builder:
 accessories:
   db:
     image: postgres:16
-    host: 192.168.1.5
+    host: 192.168.1.100
     port: "5432:5432"
     env:
       clear:
