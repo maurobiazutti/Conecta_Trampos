@@ -4,17 +4,35 @@ service: conecta_trampos
 image: maurobiazutti/conecta_trampos
 ssh:
   user: mauro
-  
+
+# servers:
+#   web:
+#     hosts:
+#       - 192.168.1.100
+#     healthcheck:
+#       path: /up
+#       port: 80
+#       wait: 60s
+
+proxy:
+  ssl: false           # Defina como true apenas quando configurar certificados
+  host: 192.168.1.100  # Ou seu domínio futuro
+  healthcheck:
+    path: /up
+    interval: 2
+    timeout: 60
+
 servers:
   web:
-    hosts:
-      - 192.168.1.100
+    - 192.168.1.100
 
 registry:
   server: ghcr.io
   username: maurobiazutti
   password:
     - KAMAL_REGISTRY_PASSWORD
+
+
 
 # Configurações de boot e deploy
 boot:
