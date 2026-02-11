@@ -8,4 +8,6 @@ class User < ApplicationRecord
          :validatable,
          :confirmable,
          :trackable
+
+  validates :name, presence: true
 end

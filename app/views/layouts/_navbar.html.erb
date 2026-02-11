@@ -14,7 +14,10 @@
       <div class="flex items-center gap-3">
         <% if user_signed_in? %>
           <%= link_to "Sair", destroy_user_session_path, data: { turbo_method: :delete }, 
-              class: "text-sm font-semibold text-gray-700 hover:text-gray-900 px-4 py-2" %>
+              class: "rounded-full px-5 py-2 text-sm font-medium text-indigo-600 ring-1 ring-indigo-600 ring-inset hover:bg-indigo-50 transition-all duration-200" %>
+
+          <p> <%= current_user.name %> </p>
+              
         <% else %>
           <%= link_to "Fazer Login", new_user_session_path, 
               class: "rounded-full px-5 py-2 text-sm font-medium text-indigo-600 ring-1 ring-indigo-600 ring-inset hover:bg-indigo-50 transition-all duration-200" %>
