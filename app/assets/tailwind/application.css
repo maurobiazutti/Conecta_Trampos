@@ -1,1 +1,38 @@
 @import "tailwindcss";
+
+@layer components {
+  /* Layout de fundo para as páginas de Auth */
+  .auth-container {
+    @apply min-h-svh flex flex-col items-center justify-center bg-slate-50 px-4 py-12;
+  }
+
+  /* O Cartão do Formulário */
+  .auth-card {
+    @apply w-full max-w-md bg-white p-8 rounded-2xl shadow-sm border border-slate-200;
+  }
+
+  /* Labels */
+  .auth-label {
+    @apply block text-sm font-semibold text-slate-700 mb-1.5;
+  }
+
+  /* Inputs Customizados */
+  .auth-input {
+    @apply block w-full px-4 py-2.5 rounded-xl border border-slate-300 
+           text-slate-900 text-sm transition-all duration-200
+           placeholder:text-slate-400
+           focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 focus:outline-none;
+  }
+
+  /* Botão Principal */
+  .auth-btn-primary {
+    @apply w-full py-3 px-4 rounded-xl bg-indigo-600 text-white text-sm font-bold
+           hover:bg-indigo-700 transition-all duration-200 shadow-sm
+           active:scale-[0.98] cursor-pointer inline-block text-center;
+  }
+
+  /* Links (Esqueci a senha, Criar conta) */
+  .auth-link {
+    @apply text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors;
+  }
+}

@@ -17,6 +17,7 @@ gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
 gem "image_processing", "~> 1.2"
+gem "devise"
 # gem "bcrypt", "~> 3.1.7"
 
 group :development, :test do
@@ -29,4 +30,6 @@ end
 
 group :development do
   gem "web-console"
+  gem "letter_opener", "~> 1.10"
 end
+

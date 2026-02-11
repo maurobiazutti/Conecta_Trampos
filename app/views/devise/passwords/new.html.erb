@@ -1,0 +1,28 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-slate-900">Esqueceu sua senha?</h2>
+      <p class="text-slate-500 text-sm mt-2">
+        Não se preocupe! Insira seu e-mail abaixo e enviaremos as instruções para você criar uma nova.
+      </p>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field mb-6">
+        <%= f.label :email, class: "auth-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", 
+            placeholder: "seu@email.com", class: "auth-input" %>
+      </div>
+
+      <div class="actions mb-6">
+        <%= f.submit "Enviar instruções de recuperação", class: "auth-btn-primary" %>
+      </div>
+    <% end %>
+
+    <div class="border-t border-slate-100 pt-6 text-center">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-slate-900">Reenviar confirmação</h2>
+      <p class="text-slate-500 text-sm mt-2">
+        Não recebeu o e-mail de ativação? Insira seu endereço abaixo para enviarmos novamente.
+      </p>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field mb-6">
+        <%= f.label :email, class: "auth-label" %>
+        <%= f.email_field :email, 
+            autofocus: true, 
+            autocomplete: "email", 
+            value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
+            placeholder: "seu@email.com", 
+            class: "auth-input" %>
+      </div>
+
+      <div class="actions mb-6">
+        <%= f.submit "Reenviar instruções", class: "auth-btn-primary" %>
+      </div>
+    <% end %>
+
+    <div class="border-t border-slate-100 pt-6 text-center">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

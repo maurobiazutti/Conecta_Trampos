@@ -1,0 +1,37 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 class="text-2xl font-bold text-slate-900 mb-6 text-center">Criar conta</h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field mb-5">
+        <%= f.label :email, class: "auth-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "auth-input", placeholder: "seu@email.com" %>
+      </div>
+
+      <div class="field mb-5">
+        <div class="flex items-center gap-2">
+          <%= f.label :password, class: "auth-label mb-0" %>
+          <% if @minimum_password_length %>
+            <span class="text-xs text-slate-400 font-normal">(mínimo <%= @minimum_password_length %> caracteres)</span>
+          <% end %>
+        </div>
+        <%= f.password_field :password, autocomplete: "new-password", class: "auth-input", placeholder: "••••••••" %>
+      </div>
+
+      <div class="field mb-6">
+        <%= f.label :password_confirmation, class: "auth-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "auth-input", placeholder: "••••••••" %>
+      </div>
+
+      <div class="actions mb-6">
+        <%= f.submit "Cadastrar-se", class: "auth-btn-primary" %>
+      </div>
+    <% end %>
+
+    <div class="border-t border-slate-100 pt-6 text-center space-y-2">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

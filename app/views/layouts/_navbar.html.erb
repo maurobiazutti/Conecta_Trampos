@@ -1,0 +1,59 @@
+<nav class="bg-slate-900 text-white" data-controller="navbar" (click.away)="hideUser">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      
+      <div class="flex items-center">
+        <%= link_to "Conecta-Trampos", root_path, class: "font-bold text-xl tracking-tight text-indigo-400" %>
+      </div>
+
+      <div class="hidden md:block ml-10 flex items-baseline space-x-4">
+        <%= link_to "Quero Trabalhar", "#", class: "hover:bg-slate-800 px-3 py-2 rounded-md text-sm font-medium" %>
+        <%= link_to "Quero Contratar", "#", class: "hover:bg-slate-800 px-3 py-2 rounded-md text-sm font-medium" %>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <% if user_signed_in? %>
+          <%= link_to "Sair", destroy_user_session_path, data: { turbo_method: :delete }, 
+              class: "text-sm font-semibold text-gray-700 hover:text-gray-900 px-4 py-2" %>
+        <% else %>
+          <%= link_to "Fazer Login", new_user_session_path, 
+              class: "rounded-full px-5 py-2 text-sm font-medium text-indigo-600 ring-1 ring-indigo-600 ring-inset hover:bg-indigo-50 transition-all duration-200" %>
+
+          <%= link_to "Cadastrar-se", new_user_registration_path, 
+              class: "rounded-full px-5 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200" %>
+        <% end %>
+      </div>
+
+      <div class="hidden md:block">
+        <div class="ml-4 flex items-center md:ml-6 relative">
+          <button data-action="click->navbar#toggleUser" type="button" class="bg-slate-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-white">
+            <span class="sr-only">Abrir menu</span>
+            <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="Avatar">
+          </button>
+
+          <div data-navbar-target="userMenu" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+            <%= link_to "Seu Perfil", "#", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+            <%= link_to "Sair", "#", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="-mr-2 flex md:hidden">
+        <button data-action="click->navbar#toggleMobile" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div data-navbar-target="mobileMenu" class="hidden md:hidden bg-slate-800">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <%= link_to "Dashboard", "#", class: "block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-slate-700" %>
+      <%= link_to "Projetos", "#", class: "block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-slate-700" %>
+      <hr class="border-slate-700 my-2">
+      <%= link_to "Sair", "#", class: "block px-3 py-2 rounded-md text-base font-medium text-red-400 hover:bg-slate-700" %>
+    </div>
+  </div>
+</nav>

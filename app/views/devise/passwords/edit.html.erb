@@ -1,0 +1,36 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-slate-900">Alterar sua senha</h2>
+      <p class="text-slate-500 text-sm mt-2">Escolha uma nova senha segura abaixo.</p>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="field mb-5">
+        <div class="flex items-center gap-2">
+          <%= f.label :password, "Nova senha", class: "auth-label mb-0" %>
+          <% if @minimum_password_length %>
+            <span class="text-xs text-slate-400 font-normal italic">(mínimo <%= @minimum_password_length %> caracteres)</span>
+          <% end %>
+        </div>
+        <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "auth-input", placeholder: "••••••••" %>
+      </div>
+
+      <div class="field mb-6">
+        <%= f.label :password_confirmation, "Confirmar nova senha", class: "auth-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "auth-input", placeholder: "••••••••" %>
+      </div>
+
+      <div class="actions mb-6">
+        <%= f.submit "Alterar minha senha", class: "auth-btn-primary" %>
+      </div>
+    <% end %>
+
+    <div class="border-t border-slate-100 pt-6 text-center">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

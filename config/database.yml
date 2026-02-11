@@ -5,19 +5,19 @@ default: &default
 
 development:
   <<: *default
-  host: <%= ENV.fetch('POSTGRES_HOST', 'localhost') %>
-  username: <%= ENV.fetch('POSTGRES_USER', 'postgres') %>
-  password: <%= ENV.fetch('POSTGRES_PASSWORD', '') %>
-  database: <%= ENV.fetch('POSTGRES_DB', 'conecta_trampos_development') %>
-  port: <%= ENV.fetch('POSTGRES_PORT', 5432) %>
+  host: localhost
+  username: postgres
+  password: <%= ENV.fetch('POSTGRES_PASSWORD') %>
+  database: conecta_trampos_development
+  port: 5432
 
 test:
   <<: *default
-  host: <%= ENV.fetch('POSTGRES_HOST', 'localhost') %>
-  username: <%= ENV.fetch('POSTGRES_USER', 'postgres') %>
-  password: <%= ENV.fetch('POSTGRES_PASSWORD', '') %>
+  host: localhost
+  username: postgres
+  password: <%= ENV.fetch('POSTGRES_PASSWORD') %>
   database: conecta_trampos_test
-  port: <%= ENV.fetch('POSTGRES_PORT', 5432) %>
+  port: 5432
 
 production:
   primary: &primary_production
