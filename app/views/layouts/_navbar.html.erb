@@ -12,12 +12,12 @@
       </div>
 
       <div class="flex items-center gap-3">
+        <p> <%= current_user.name %> </p>
+        
         <% if user_signed_in? %>
           <%= link_to "Sair", destroy_user_session_path, data: { turbo_method: :delete }, 
               class: "rounded-full px-5 py-2 text-sm font-medium text-indigo-600 ring-1 ring-indigo-600 ring-inset hover:bg-indigo-50 transition-all duration-200" %>
 
-          <p> <%= current_user.name %> </p>
-              
         <% else %>
           <%= link_to "Fazer Login", new_user_session_path, 
               class: "rounded-full px-5 py-2 text-sm font-medium text-indigo-600 ring-1 ring-indigo-600 ring-inset hover:bg-indigo-50 transition-all duration-200" %>
@@ -27,27 +27,29 @@
         <% end %>
       </div>
 
-      <div class="hidden md:block">
-        <div class="ml-4 flex items-center md:ml-6 relative">
-          <button data-action="click->navbar#toggleUser" type="button" class="bg-slate-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-white">
-            <span class="sr-only">Abrir menu</span>
-            <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="Avatar">
-          </button>
+      <%#
+        <div class="hidden md:block">
+          <div class="ml-4 flex items-center md:ml-6 relative">
+            <button data-action="click->navbar#toggleUser" type="button" class="bg-slate-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-white">
+              <span class="sr-only">Abrir menu</span>
+              <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="Avatar">
+            </button>
 
-          <div data-navbar-target="userMenu" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
-            <%= link_to "Seu Perfil", "#", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
-            <%= link_to "Sair", "#", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+            <div data-navbar-target="userMenu" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+              <%= link_to "Seu Perfil", "#", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+              <%#link_to "Sair", "#", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+              <%#
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="-mr-2 flex md:hidden">
+        %>
+      <%# <div class="-mr-2 flex md:hidden">
         <button data-action="click->navbar#toggleMobile" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none">
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-      </div>
+      </div> %>
     </div>
   </div>
 

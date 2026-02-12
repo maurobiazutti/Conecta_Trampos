@@ -10,10 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_11_142003) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_12_125257) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
+
+  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "cep"
+    t.string "city"
+    t.string "complement"
+    t.datetime "created_at", null: false
+    t.string "neighborhood"
+    t.string "number"
+    t.string "state"
+    t.string "street"
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "phone"
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "prolife_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "category_id", null: false
+    t.datetime "created_at", null: false
+    t.uuid "profile_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_prolife_categories_on_category_id"
+    t.index ["profile_id"], name: "index_prolife_categories_on_profile_id"
+  end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "confirmation_sent_at"
@@ -38,4 +77,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_11_142003) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "addresses", "users"
+  add_foreign_key "profiles", "users"
+  add_foreign_key "prolife_categories", "categories"
+  add_foreign_key "prolife_categories", "profiles"
 end
