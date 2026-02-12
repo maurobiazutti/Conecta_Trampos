@@ -1,38 +1,73 @@
-<div class="auth-container">
-  <div class="auth-card">
-    <h2 class="text-2xl font-bold text-slate-900 mb-8 text-center">Log in</h2>
+<%= turbo_frame_tag "modal" do %>
+  <div data-controller="modal"
+       class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      
-      <div class="field mb-5">
-        <%= f.label :email, class: "auth-label" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "auth-input", placeholder: "seu@email.com" %>
-      </div>
+    <div class="relative w-full max-w-md mx-4">
+      <div class="auth-card h-auto">
 
-      <div class="field mb-5">
-        <div class="flex justify-between items-center mb-1.5">
-          <%= f.label :password, class: "auth-label mb-0" %>
-          <%- if devise_mapping.recoverable? %>
-            <%= link_to "Esqueceu a senha?", new_password_path(resource_name), class: "auth-link text-xs" %>
+        <button
+          type="button"
+          data-action="click->modal#close"
+          class="absolute right-4 top-4 text-slate-400 hover:text-slate-700">
+          ✕
+        </button>
+
+        <h2 class="text-2xl font-bold text-slate-900 mb-8 text-center">
+          Log in
+        </h2>
+
+        <%= form_for(resource,
+          as: resource_name,
+          url: session_path(resource_name),
+          html: { data: { turbo_frame: "_top" } }) do |f| %>
+
+          <div class="field mb-5">
+            <%= f.label :email, class: "auth-label" %>
+            <%= f.email_field :email,
+              autofocus: true,
+              autocomplete: "email",
+              class: "auth-input",
+              placeholder: "seu@email.com" %>
+          </div>
+
+          <div class="field mb-5">
+            <div class="flex justify-between items-center mb-1.5">
+              <%= f.label :password, class: "auth-label mb-0" %>
+
+              <% if devise_mapping.recoverable? %>
+                <%= link_to "Esqueceu a senha?",
+                  new_password_path(resource_name),
+                  class: "auth-link text-xs",
+                  data: { turbo_frame: "modal" } %>
+              <% end %>
+            </div>
+
+            <%= f.password_field :password,
+              autocomplete: "current-password",
+              class: "auth-input",
+              placeholder: "••••••••" %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="flex items-center mb-6">
+              <%= f.check_box :remember_me,
+                class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300 rounded cursor-pointer" %>
+
+              <%= f.label :remember_me,
+                "Lembrar de mim",
+                class: "ml-2 block text-sm text-slate-600 cursor-pointer" %>
+            </div>
           <% end %>
+
+          <div class="actions">
+            <%= f.submit "Entrar", class: "auth-btn-primary w-full" %>
+          </div>
+        <% end %>
+
+        <div class="mt-8 pt-6 border-t border-slate-100 text-center">
+          <%= render "devise/shared/links" %>
         </div>
-        <%= f.password_field :password, autocomplete: "current-password", class: "auth-input", placeholder: "••••••••" %>
       </div>
-
-      <% if devise_mapping.rememberable? %>
-        <div class="flex items-center mb-6">
-          <%= f.check_box :remember_me, class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300 rounded cursor-pointer" %>
-          <%= f.label :remember_me, "Lembrar de mim", class: "ml-2 block text-sm text-slate-600 cursor-pointer" %>
-        </div>
-      <% end %>
-
-      <div class="actions">
-        <%= f.submit "Entrar", class: "auth-btn-primary" %>
-      </div>
-    <% end %>
-
-    <div class="mt-8 pt-6 border-t border-slate-100 text-center">
-      <%= render "devise/shared/links" %>
     </div>
   </div>
-</div>
+<% end %>

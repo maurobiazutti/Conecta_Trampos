@@ -7,16 +7,26 @@
       </div>
 
       <div class="hidden md:block ml-10 flex items-baseline space-x-4">
-        <%= link_to "Quero Trabalhar", "#", class: "hover:bg-slate-800 px-3 py-2 rounded-md text-sm font-medium" %>
+        <%= link_to "Quero Trabalhar", 
+          new_user_session_path, 
+          data: { turbo_frame: "modal" }, 
+          class: "hover:bg-slate-800 px-3 py-2 rounded-md text-sm font-medium"
+        %>
+
         <%= link_to "Quero Contratar", "#", class: "hover:bg-slate-800 px-3 py-2 rounded-md text-sm font-medium" %>
       </div>
 
       <div class="flex items-center gap-3">
-        <p> <%= current_user.name %> </p>
         
         <% if user_signed_in? %>
-          <%= link_to "Sair", destroy_user_session_path, data: { turbo_method: :delete }, 
-              class: "rounded-full px-5 py-2 text-sm font-medium text-indigo-600 ring-1 ring-indigo-600 ring-inset hover:bg-indigo-50 transition-all duration-200" %>
+         <div class="flex items-center gap-4">
+            <span class="text-sm text-white font-medium">
+              <%= current_user.email %>
+            </span>
+
+            <%= link_to "Sair", destroy_user_session_path, data: { turbo_method: :delete }, 
+                class: "rounded-full px-5 py-2 text-sm font-medium text-indigo-600 ring-1 ring-indigo-600 ring-inset hover:bg-indigo-50 transition-all duration-200" %>
+          </div>
 
         <% else %>
           <%= link_to "Fazer Login", new_user_session_path, 
