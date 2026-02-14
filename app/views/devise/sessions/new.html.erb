@@ -1,5 +1,6 @@
 <%= turbo_frame_tag "modal" do %>
   <div data-controller="modal"
+       data-action="click->modal#closeBackground"
        class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
 
     <div class="relative w-full max-w-md mx-4">

@@ -5,9 +5,9 @@ export default class extends Controller {
     this.element.remove()
   }
 
-closeBackground(event) {
-    if (event.target === this.element) {
-      this.close()
+  closeBackground(event) {
+      if (event.target === this.element) {
+        this.close()
+      }
     }
-  }
 }
