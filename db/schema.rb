@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_12_125257) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_14_130943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -35,6 +35,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_12_125257) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "profile_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "category_id", null: false
+    t.datetime "created_at", null: false
+    t.uuid "profile_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_profile_categories_on_category_id"
+    t.index ["profile_id"], name: "index_profile_categories_on_profile_id"
+  end
+
   create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "active"
     t.datetime "created_at", null: false
@@ -43,15 +52,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_12_125257) do
     t.datetime "updated_at", null: false
     t.uuid "user_id", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
-  end
-
-  create_table "prolife_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "category_id", null: false
-    t.datetime "created_at", null: false
-    t.uuid "profile_id", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_prolife_categories_on_category_id"
-    t.index ["profile_id"], name: "index_prolife_categories_on_profile_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -79,7 +79,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_12_125257) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "profile_categories", "categories"
+  add_foreign_key "profile_categories", "profiles"
   add_foreign_key "profiles", "users"
-  add_foreign_key "prolife_categories", "categories"
-  add_foreign_key "prolife_categories", "profiles"
 end
