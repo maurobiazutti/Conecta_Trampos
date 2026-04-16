@@ -13,4 +13,5 @@ class User < ApplicationRecord
 
   has_one :address, dependent: :destroy
   has_one :profile, dependent: :destroy
+  has_many :service_requests, dependent: :destroy
 end
