@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
     @profile = current_user.build_profile(profile_params)
 
     if @profile.save
-      redirect_to profile_path, notice: "Perfil criado com sucesso!"
+      redirect_to new_address_path, notice: "Perfil criado com sucesso! Agora cadastre seu endereco."
     else
       render :new, status: :unprocessable_entity
     end

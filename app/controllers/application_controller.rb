@@ -13,12 +13,21 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if resource.respond_to?(:profile_incomplete?) && resource.profile_incomplete?
-      resource.profile.nil? ? new_profile_path : edit_profile_path
-    else
-      root_path
-    end
+    return super unless resource.is_a?(User)
+
+    onboarding_path_for(resource) || root_path
   end
 
+  def after_sign_up_path_for(resource)
+    onboarding_path_for(resource) || super
+  end
 
+  private
+
+  def onboarding_path_for(user)
+    return user.profile.nil? ? new_profile_path : edit_profile_path if user.profile_incomplete?
+    return user.address.nil? ? new_address_path : edit_address_path if user.address_incomplete?
+
+    nil
+  end
 end
