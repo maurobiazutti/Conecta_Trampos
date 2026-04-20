@@ -1,0 +1,35 @@
+<div class="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">Meu Endereco</h1>
+    <%= link_to "Editar", edit_address_path, class: "px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md text-sm font-medium" %>
+  </div>
+
+  <div class="space-y-4">
+    <div>
+      <h3 class="text-sm font-medium text-gray-500">CEP</h3>
+      <p class="text-gray-900"><%= @address.cep %></p>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-medium text-gray-500">Rua</h3>
+      <p class="text-gray-900"><%= @address.street %>, <%= @address.number %></p>
+    </div>
+
+    <% if @address.complement.present? %>
+      <div>
+        <h3 class="text-sm font-medium text-gray-500">Complemento</h3>
+        <p class="text-gray-900"><%= @address.complement %></p>
+      </div>
+    <% end %>
+
+    <div>
+      <h3 class="text-sm font-medium text-gray-500">Bairro</h3>
+      <p class="text-gray-900"><%= @address.neighborhood %></p>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-medium text-gray-500">Cidade / Estado</h3>
+      <p class="text-gray-900"><%= @address.city %> - <%= @address.state %></p>
+    </div>
+  </div>
+</div>
