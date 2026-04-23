@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
     @profile = current_user.build_profile(profile_params)
 
     if @profile.save
-      redirect_to new_address_path, notice: "Perfil criado com sucesso! Agora cadastre seu endereco."
+      redirect_to next_onboarding_step_for(current_user, fallback: profile_path), notice: "Perfil criado com sucesso!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
-      redirect_to profile_path, notice: "Perfil atualizado!"
+      redirect_to next_onboarding_step_for(current_user, fallback: profile_path), notice: "Perfil atualizado!"
     else
       render :edit, status: :unprocessable_entity
     end

@@ -1,3 +1,47 @@
- <turbo-frame id="modal"></turbo-frame>
+<turbo-frame id="modal"></turbo-frame>
 
- <h1>Ola</h1>
+<div class="w-full max-w-7xl py-10">
+  <div class="mb-8 flex items-end justify-between gap-4">
+    <div>
+      <h1 class="text-3xl font-bold text-slate-900">Servicos cadastrados</h1>
+      <p class="mt-2 text-sm text-slate-600">Veja os pedidos mais recentes publicados na plataforma.</p>
+    </div>
+
+    <%= link_to "Quero Contratar", start_service_requests_path, class: "rounded-full bg-indigo-600 px-5 py-3 text-sm font-medium text-white shadow-md transition hover:bg-indigo-700 hover:shadow-lg" %>
+  </div>
+
+  <% if @service_requests.any? %>
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <% @service_requests.each do |service_request| %>
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+          <div class="mb-4 flex items-start justify-between gap-3">
+            <div>
+              <p class="mb-2 inline-flex rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-700">
+                <%= service_request.category&.name || "Sem categoria" %>
+              </p>
+              <h2 class="text-xl font-semibold text-slate-900"><%= service_request.title %></h2>
+            </div>
+
+            <span class="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">
+              <%= service_request.status %>
+            </span>
+          </div>
+
+          <p class="mb-6 line-clamp-4 text-sm leading-6 text-slate-600">
+            <%= service_request.description %>
+          </p>
+
+          <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-sm text-slate-500">
+            <span><%= service_request.user&.name || service_request.user&.email %></span>
+            <span><%= l(service_request.created_at.to_date, format: :short) %></span>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center shadow-sm">
+      <h2 class="text-xl font-semibold text-slate-900">Nenhum servico cadastrado ainda</h2>
+      <p class="mt-3 text-sm text-slate-600">Publique o primeiro pedido para comecar a receber propostas.</p>
+    </div>
+  <% end %>
+</div>

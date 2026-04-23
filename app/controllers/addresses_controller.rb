@@ -15,7 +15,7 @@ class AddressesController < ApplicationController
     @address = current_user.build_address(address_params)
 
     if @address.save
-      redirect_to root_path, notice: "Endereco cadastrado com sucesso!"
+      redirect_to next_onboarding_step_for(current_user, fallback: root_path), notice: "Endereco cadastrado com sucesso!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      redirect_to address_path, notice: "Endereco atualizado com sucesso!"
+      redirect_to next_onboarding_step_for(current_user, fallback: address_path), notice: "Endereco atualizado com sucesso!"
     else
       render :edit, status: :unprocessable_entity
     end
