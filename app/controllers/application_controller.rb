@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   stale_when_importmap_changes
 
-   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
 
@@ -15,11 +15,11 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     return super unless resource.is_a?(User)
 
-    onboarding_path_for(resource) || root_path
+    next_onboarding_step_for(resource, fallback: root_path)
   end
 
   def after_sign_up_path_for(resource)
-    onboarding_path_for(resource) || super
+    next_onboarding_step_for(resource, fallback: super)
   end
 
   private
@@ -29,5 +29,17 @@ class ApplicationController < ActionController::Base
     return user.address.nil? ? new_address_path : edit_address_path if user.address_incomplete?
 
     nil
+  end
+
+  def next_onboarding_step_for(user, fallback:)
+    onboarding_path_for(user) || consume_post_onboarding_path || fallback
+  end
+
+  def store_post_onboarding_path(path)
+    session[:post_onboarding_path] = path
+  end
+
+  def consume_post_onboarding_path
+    session.delete(:post_onboarding_path)
   end
 end
