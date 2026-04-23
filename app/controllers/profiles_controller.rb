@@ -42,6 +42,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:description, :phone, :active, user_attributes: [ :name ])
+    params.require(:profile).permit(:description, :phone, :active, user_attributes: [ :name ], category_ids: [])
   end
 end
