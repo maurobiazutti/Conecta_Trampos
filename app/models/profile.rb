@@ -5,7 +5,8 @@ class Profile < ApplicationRecord
   has_many :proposals
 
   accepts_nested_attributes_for :user
-  def profile_incomplete?
-    profile.nil? || profile.description.blank? || profile.phone.blank? || profile.name.blank?
-  end
+
+  # def profile_incomplete?
+  #   profile.nil? || profile.description.blank? || profile.phone.blank? || profile.name.blank?
+  # end
 end
